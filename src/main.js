@@ -34,7 +34,7 @@ client.on('messageCreate', (msg) => {
         default:
             break;
     }
-
+//new version
 })
 
 client.login("TOKEN")
