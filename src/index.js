@@ -23,8 +23,6 @@ client.on('messageCreate', (msg) => {
     switch (msg.content) {
         case "sa":
             // msg.reply("as!")
-            // client.users.cache.get(msg.author).send("Merhaba bu bir spesifik bir mesajdır.");
-            // client.users.get(msg.author).send("Merhaba bu bir spesifik bir mesajdır.");
             msg.author.send("bu senin için özel mesaj canım")
             break;
         case "😃":
