@@ -35,7 +35,6 @@ client.on('messageCreate', (msg) => {
         default:
             break;
     }
-//new deneme
 })
 
 // client.on("messageCreate", async (msg) => {
