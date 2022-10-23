@@ -4,7 +4,8 @@ import { Client, GatewayIntentBits } from 'discord.js'
 const client = new Client({
     intents: [GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent]
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers]
 })
 
 config()
@@ -19,30 +20,38 @@ client.on('messageCreate', (msg) => {
     console.log(msg.author.tag);
 
 
-    // switch (msg.content) {
-    //     case "sa":
-    //         console.log("as");
-    //         break;
-    //     case "😃":
-    //         console.log("bu emojidir");
-
-    //         break;
-
-    //     default:
-    //         break;
-    // }
-
-})
-
-client.on("messageCreate", async (msg) => {
-   
-    
-    if (msg.content === 'ping') {
-        console.log(msg.content);
-        msg.reply("pong!")
+    switch (msg.content) {
+        case "sa":
+            // msg.reply("as!")
+            // client.users.cache.get(msg.author).send("Merhaba bu bir spesifik bir mesajdır.");
+            // client.users.get(msg.author).send("Merhaba bu bir spesifik bir mesajdır.");
+            msg.author.send("bu senin için özel mesaj canım")
+            break;
+        case "😃":
+            msg.reply("bu emojidir");
+            break;
+        case "ping":
+            msg.reply("pong")
+        case "pong":
+            msg.reply("Şaka yapmayı bırak şakacı şey seni!!!! 😃😃")
+        default:
+            break;
     }
 
 })
+
+// client.on("messageCreate", async (msg) => {
+
+
+//     if (msg.content === 'ping') {
+//         console.log(msg.content);
+//         msg.reply("pong!")
+//     }
+
+//     if (msg.content === 'pong') {
+//         msg.reply("Şaka yapmayı bırak şakacı şey seni!!!! 😃😃");
+//     }
+// })
 
 
 client.login(process.env.token)
