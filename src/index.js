@@ -5,7 +5,7 @@ const client = new Client({
     intents: [GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMembers]
+    GatewayIntentBits.GuildMembers] 
 })
 
 config()
@@ -15,9 +15,9 @@ client.once('ready', () => {
 })
 
 client.on('messageCreate', (msg) => {
-    console.log(msg.content);
-    console.log(msg.createdAt.toDateString())
-    console.log(msg.author.tag);
+    // console.log(msg.content);
+    // console.log(msg.createdAt.toDateString())
+    // console.log(msg.author.tag);
 
 
     switch (msg.content) {
@@ -37,18 +37,12 @@ client.on('messageCreate', (msg) => {
     }
 })
 
-// client.on("messageCreate", async (msg) => {
+client.on('guildMemberAdd', async member => {
+    const channel = member.guild.channels.cache.get(member.guild.id);
+    if (!channel) return;
 
-
-//     if (msg.content === 'ping') {
-//         console.log(msg.content);
-//         msg.reply("pong!")
-//     }
-
-//     if (msg.content === 'pong') {
-//         msg.reply("Şaka yapmayı bırak şakacı şey seni!!!! 😃😃");
-//     }
-// })
+    channel.send("text-here!")
+});
 
 
 client.login(process.env.token)
