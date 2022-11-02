@@ -1,12 +1,12 @@
 import { config } from 'dotenv'
-import { AttachmentBuilder, Client, GatewayIntentBits } from 'discord.js'
+import { AttachmentBuilder, Client, GatewayIntentBits, EmbedBuilder } from 'discord.js'
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildMembers,
-    
+
     ]
 })
 
@@ -57,10 +57,37 @@ client.on('messageCreate', (msg) => {
 
 // })
 
-client.on("guildMemberAdd", member => {
-    member.guild.channels.cache.get("1026155097970987020").send("test message")
-    console.log(member.user.username + ' is in da house');
+// client.on("guildMemberAdd", member => {
 
-});
+//     console.log(member.user.username + ' is in da house');
+//     console.log(member.guild.channels)
+
+// });
+
+// inside a command, event listener, etc.
+const exampleEmbed = new EmbedBuilder()
+    .setColor(0x0099FF)
+    .setTitle('Test Sunucusuna Hoşgeldin')
+    .setURL('https://discord.js.org/')
+    .setAuthor({ name: 'ZORT', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
+    .setDescription('BAZI Tanımlamalar')
+    .setThumbnail('https://upload.wikimedia.org/wikipedia/commons/6/6a/L80385-flash-superhero-logo-1544.png')
+    .addFields(
+        { name: 'Regular field title', value: 'Some value here' },
+        { name: '\u200B', value: '\u200B' },
+        { name: 'Inline field title', value: 'Some value here', inline: true },
+        { name: 'Inline field title', value: 'Some value here', inline: true },
+    )
+    .addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
+    .setImage('https://i.imgur.com/AfFp7pu.png')
+    .setTimestamp()
+    .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+
+
+client.on("guildMemberAdd", msg => {
+    msg.send({
+        embeds: [exampleEmbed]}
+    );
+})
 
 client.login(process.env.token)
