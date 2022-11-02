@@ -1,11 +1,13 @@
 import { config } from 'dotenv'
-import { Client, GatewayIntentBits } from 'discord.js'
+import { AttachmentBuilder, Client, GatewayIntentBits } from 'discord.js'
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMembers] 
+    GatewayIntentBits.GuildMembers,
+    
+    ]
 })
 
 config()
@@ -32,17 +34,33 @@ client.on('messageCreate', (msg) => {
             msg.reply("pong")
         case "pong":
             msg.reply("Şaka yapmayı bırak şakacı şey seni!!!! 😃😃")
+        case "🥸":
+            msg.reply("HOŞGELDİN CEM!")
         default:
             break;
     }
 })
 
-client.on('guildMemberAdd', async member => {
-    const channel = member.guild.channels.cache.get(member.guild.id);
-    if (!channel) return;
+// client.on('guildMemberAdd', async member => {
+//     const channel = member.guild.channels.cache.get(member.guild.id);
+//     if (!channel) return;
 
-    channel.send("text-here!")
+//     channel.send("text-here!")
+// });
+
+// client.on("messageCreate", (msg) =>{
+//     let isWelcomeMessage = msg.type === GUILD_MEMBER_ADD
+
+//     if (isWelcomeMessage) {
+//         msg.author.send(`Welcome our server ${msg.author.username}`)
+//     }
+
+// })
+
+client.on("guildMemberAdd", member => {
+    member.guild.channels.cache.get("1026155097970987020").send("test message")
+    console.log(member.user.username + ' is in da house');
+
 });
-
 
 client.login(process.env.token)
